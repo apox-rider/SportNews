@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import type { ReactNode } from "react";
 
 const exploreLinks = [
@@ -59,12 +59,19 @@ export default function AppFooter() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div>
-            <p className="flex items-center gap-2 text-lg font-extrabold tracking-tight text-emerald-700">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-sm text-white">
-                SN
-              </span>
-              Sport<span className="text-emerald-600">News</span>
-            </p>
+                 <NavLink
+          to="/"
+          className="flex justify-center items-center gap-2 text-lg font-extrabold tracking-tight text-emerald-700"
+        >
+          <img
+            src="/SportNews.png"
+            alt="SportNews"
+            className="h-20 w-15 rounded-lg object-cover"
+          />
+          {/* <span>
+            Sport<span className="text-emerald-600">News</span>
+          </span> */}
+        </NavLink>
             <p className="mt-3 max-w-xs text-sm text-slate-500">
               Sports news, leagues, live scores and results from around the
               world.

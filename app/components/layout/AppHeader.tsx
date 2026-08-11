@@ -20,12 +20,14 @@ export default function AppHeader() {
           to="/"
           className="flex items-center gap-2 text-lg font-extrabold tracking-tight text-emerald-700"
         >
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-600 text-white">
-            SN
-          </span>
-          <span>
+          <img
+            src="/SportNews.png"
+            alt="SportNews"
+            className="h-20 w-15 rounded-lg object-cover"
+          />
+          {/* <span>
             Sport<span className="text-emerald-600">News</span>
-          </span>
+          </span> */}
         </NavLink>
 
         <nav className="hidden items-center gap-1 md:flex">
