@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import type { Route } from "./+types/leagues.$id";
+import type { Route } from "./+types/index";
 import {
   getLeague,
   getLeagueEvents,
@@ -8,15 +8,17 @@ import {
   getLeagueTeams,
   safe,
   safeArr,
-} from "../lib/sportsdb";
-import DetailHero from "../components/DetailHero";
-import InfoGrid, { InfoItem } from "../components/InfoGrid";
-import PageContainer from "../components/PageContainer";
-import CardGrid from "../components/CardGrid";
-import TeamCard from "../components/TeamCard";
-import TabNav from "../components/TabNav";
-import EventSection, { isFinished } from "../components/EventSection";
-import EmptyState from "../components/EmptyState";
+} from "~/api/sportsdb/sportsdb";
+import { getContinentById, getContinentOf, getFlagUrl } from "~/utils/continents";
+import DetailHero from "~/components/DetailHero";
+import InfoGrid, { InfoItem } from "~/components/ui/InfoGrid";
+import PageContainer from "~/components/ui/PageContainer";
+import CardGrid from "~/components/ui/CardGrid";
+import TeamCard from "~/components/TeamCard";
+import TabNav from "~/components/ui/TabNav";
+import EventSection, { isFinished } from "~/components/EventSection";
+import EmptyState from "~/components/ui/EmptyState";
+import SmartImage from "~/components/ui/SmartImage";
 
 export const meta: Route.MetaFunction = ({ loaderData }) => [
   { title: loaderData?.league?.strLeague
@@ -65,13 +67,34 @@ export default function LeagueDetail({ loaderData }: Route.ComponentProps) {
     return <PageContainer><EmptyState title="League not found" /></PageContainer>;
   }
 
+  const continentId = getContinentOf(league.strCountry);
+  const continentName =
+    continentId === "unknown" ? null : getContinentById(continentId).name;
+
+  const socials = [
+    { label: "Website", value: league.strWebsite },
+    { label: "Facebook", value: league.strFacebook },
+    { label: "Twitter / X", value: league.strTwitter },
+    { label: "Instagram", value: league.strInstagram },
+    { label: "YouTube", value: league.strYoutube },
+  ].filter((s) => s.value);
+
+  const gallery = [
+    league.strLogo,
+    league.strPoster,
+    league.strTrophy,
+    league.strFanart1,
+    league.strFanart2,
+  ].filter((src): src is string => Boolean(src));
+
   return (
     <div>
       <DetailHero
         badge={league.strBadge}
+        flag={getFlagUrl(league.strCountry)}
         banner={league.strFanart1 || league.strBanner}
         title={league.strLeague}
-        subtitle={[league.strCountry, league.strGender, league.strSport]
+        subtitle={[league.strCountry, continentName, league.strGender, league.strSport]
           .filter(Boolean)
           .join(" · ")}
       >
@@ -168,21 +191,93 @@ export default function LeagueDetail({ loaderData }: Route.ComponentProps) {
         )}
 
         {active === "info" && (
-          <div className="space-y-8">
+          <div className="space-y-10">
             <InfoGrid>
               <InfoItem label="Country" value={league.strCountry} />
+              <InfoItem label="Continent" value={continentName} />
               <InfoItem label="Sport" value={league.strSport} />
               <InfoItem label="Gender" value={league.strGender} />
+              <InfoItem label="Division" value={league.intDivision} />
+              <InfoItem
+                label="Alternate name"
+                value={league.strLeagueAlternate}
+              />
               <InfoItem label="Formed" value={league.intFormedYear} />
               <InfoItem label="Current season" value={league.strCurrentSeason} />
               <InfoItem label="First event" value={league.dateFirstEvent} />
+              <InfoItem
+                label="Cup competition"
+                value={
+                  league.idCup
+                    ? league.idCup === "0"
+                      ? "No"
+                      : "Yes"
+                    : undefined
+                }
+              />
             </InfoGrid>
+
+            {gallery.length > 0 && (
+              <section>
+                <h2 className="mb-3 text-xl font-bold tracking-tight text-slate-900">
+                  Branding
+                </h2>
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+                  {gallery.map((src) => (
+                    <div
+                      key={src}
+                      className="flex aspect-video items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-white p-4"
+                    >
+                      <SmartImage
+                        src={src}
+                        alt={`${league.strLeague} imagery`}
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
             {league.strDescriptionEN && (
               <section>
                 <h2 className="mb-3 text-xl font-bold tracking-tight text-slate-900">About</h2>
                 <p className="whitespace-pre-line leading-relaxed text-slate-600">
                   {league.strDescriptionEN}
                 </p>
+              </section>
+            )}
+
+            {socials.length > 0 && (
+              <section>
+                <h2 className="mb-3 text-xl font-bold tracking-tight text-slate-900">
+                  Official links
+                </h2>
+                <ul className="flex flex-wrap gap-2">
+                  {socials.map((s) => (
+                    <li key={s.label}>
+                      <a
+                        href={`https://${s.value!.replace(/^https?:\/\//, "")}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-block rounded-full border border-slate-300 bg-white px-4 py-1.5 text-sm font-medium text-slate-700 hover:border-emerald-400 hover:text-emerald-700"
+                      >
+                        {s.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {league.strTvRights && (
+              <section>
+                <h2 className="mb-3 text-xl font-bold tracking-tight text-slate-900">
+                  Broadcast & TV rights
+                </h2>
+                <div className="whitespace-pre-line rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm leading-relaxed text-slate-600">
+                  {league.strTvRights}
+                </div>
               </section>
             )}
           </div>

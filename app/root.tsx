@@ -8,9 +8,9 @@ import {
 } from "react-router";
 
 import type { Route } from "./+types/root";
-import AppHeader from "./components/AppHeader";
-import AppFooter from "./components/AppFooter";
-import "./app.css";
+import AppHeader from "./components/layout/AppHeader";
+import AppFooter from "./components/layout/AppFooter";
+import "./styles/app.css";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },

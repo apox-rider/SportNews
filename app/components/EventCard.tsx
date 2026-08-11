@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-import SmartImage from "./SmartImage";
-import type { SportEvent } from "../lib/types";
+import SmartImage from "./ui/SmartImage";
+import type { SportEvent } from "~/api/sportsdb/sportsdb-schema";
 
 export function isFinished(event: SportEvent): boolean {
   const status = (event.strStatus ?? "").trim().toUpperCase();

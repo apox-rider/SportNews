@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import type { Route } from "./+types/teams.$id";
+import type { Route } from "./+types/index";
 import {
   getTeam,
   getTeamLastEvents,
@@ -7,15 +7,15 @@ import {
   getTeamPlayers,
   safe,
   safeArr,
-} from "../lib/sportsdb";
-import DetailHero from "../components/DetailHero";
-import InfoGrid, { InfoItem } from "../components/InfoGrid";
-import PageContainer from "../components/PageContainer";
-import CardGrid from "../components/CardGrid";
-import PlayerCard from "../components/PlayerCard";
-import TabNav from "../components/TabNav";
-import EventSection, { isFinished } from "../components/EventSection";
-import EmptyState from "../components/EmptyState";
+} from "~/api/sportsdb/sportsdb";
+import DetailHero from "~/components/DetailHero";
+import InfoGrid, { InfoItem } from "~/components/ui/InfoGrid";
+import PageContainer from "~/components/ui/PageContainer";
+import CardGrid from "~/components/ui/CardGrid";
+import PlayerCard from "~/components/PlayerCard";
+import TabNav from "~/components/ui/TabNav";
+import EventSection, { isFinished } from "~/components/EventSection";
+import EmptyState from "~/components/ui/EmptyState";
 
 export const meta: Route.MetaFunction = ({ loaderData }) => [
   { title: loaderData?.team?.strTeam

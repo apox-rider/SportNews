@@ -1,7 +1,31 @@
+import type { ContinentId } from "~/utils/continents";
+
 export interface LeagueSummary {
   idLeague: string;
   strLeague: string;
   strSport: string;
+  strLeagueAlternate?: string | null;
+  strCountry?: string | null;
+  strGender?: string | null;
+  intFormedYear?: string | null;
+  intDivision?: string | null;
+  idCup?: string | null;
+  strCurrentSeason?: string | null;
+  strWebsite?: string | null;
+  strFacebook?: string | null;
+  strTwitter?: string | null;
+  strInstagram?: string | null;
+  strYoutube?: string | null;
+  strTvRights?: string | null;
+  strDescriptionEN?: string | null;
+  dateFirstEvent?: string | null;
+  strFanart1?: string | null;
+  strBanner?: string | null;
+  strBadge?: string | null;
+  strLogo?: string | null;
+  strPoster?: string | null;
+  strTrophy?: string | null;
+  continent?: ContinentId;
 }
 
 export interface League extends LeagueSummary {

@@ -1,14 +1,16 @@
 import type { ReactNode } from "react";
-import SmartImage from "./SmartImage";
+import SmartImage from "./ui/SmartImage";
 
 export default function DetailHero({
   badge,
+  flag,
   banner,
   title,
   subtitle,
   children,
 }: {
   badge?: string | null;
+  flag?: string | null;
   banner?: string | null;
   title: string;
   subtitle?: string | null;
@@ -29,12 +31,19 @@ export default function DetailHero({
       )}
       <div className="relative mx-auto flex max-w-7xl flex-col items-start gap-6 px-4 py-12 sm:flex-row sm:items-center sm:px-6">
         {badge && (
-          <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl bg-white p-3 shadow-lg">
+          <div className="relative flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl bg-white p-3 shadow-lg">
             <SmartImage
               src={badge}
               alt={title}
               className="max-h-full max-w-full object-contain"
             />
+            {flag && (
+              <SmartImage
+                src={flag}
+                alt={title}
+                className="absolute -right-2 -top-2 h-7 w-auto rounded-md shadow ring-2 ring-white"
+              />
+            )}
           </div>
         )}
         <div className="min-w-0">

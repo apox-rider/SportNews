@@ -1,17 +1,17 @@
-import type { Route } from "./+types/search";
+import type { Route } from "./+types/index";
 import {
   searchEventsByName,
   searchPlayersByName,
   searchTeamsByName,
   safeArr,
-} from "../lib/sportsdb";
-import SearchBar from "../components/SearchBar";
-import PageContainer from "../components/PageContainer";
-import CardGrid from "../components/CardGrid";
-import TeamCard from "../components/TeamCard";
-import PlayerCard from "../components/PlayerCard";
-import EventCard from "../components/EventCard";
-import EmptyState from "../components/EmptyState";
+} from "~/api/sportsdb/sportsdb";
+import SearchBar from "~/components/ui/SearchBar";
+import PageContainer from "~/components/ui/PageContainer";
+import CardGrid from "~/components/ui/CardGrid";
+import TeamCard from "~/components/TeamCard";
+import PlayerCard from "~/components/PlayerCard";
+import EventCard from "~/components/EventCard";
+import EmptyState from "~/components/ui/EmptyState";
 
 export const meta: Route.MetaFunction = ({ loaderData }) => [
   { title: loaderData?.query ? `Search: ${loaderData.query} — SportPesa News` : "Search — SportPesa News" },

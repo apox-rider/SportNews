@@ -6,16 +6,30 @@ import type {
   SportEvent,
   StandingRow,
   Team,
-} from "./types";
+} from "./sportsdb-schema";
+import { getContinentOf } from "~/utils/continents";
+import { CACHE_TTL_MS, FETCH_TIMEOUT_MS } from "~/constants";
 
 export const API_KEY = process.env.SPORTSDB_API_KEY ?? "3";
 export const BASE_URL = `https://www.thesportsdb.com/api/v1/json/${API_KEY}`;
 
-const CACHE_TTL_MS = 60_000;
 const cache = new Map<string, { value: unknown; expires: number }>();
 
 function clean<T>(value: T[] | null | undefined): T[] {
   return Array.isArray(value) ? value : [];
+}
+
+async function fetchJson(url: string): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+  try {
+    return await fetch(url, {
+      headers: { accept: "application/json" },
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 async function getJson<T>(endpoint: string): Promise<T> {
@@ -24,16 +38,12 @@ async function getJson<T>(endpoint: string): Promise<T> {
     return cached.value as T;
   }
 
-  const res = await fetch(`${BASE_URL}/${endpoint}`, {
-    headers: { accept: "application/json" },
-  });
+  const res = await fetchJson(`${BASE_URL}/${endpoint}`);
 
   if (res.status === 429) {
     const retryAfter = Number(res.headers.get("retry-after")) || 1;
     await new Promise((r) => setTimeout(r, retryAfter * 1000));
-    const retry = await fetch(`${BASE_URL}/${endpoint}`, {
-      headers: { accept: "application/json" },
-    });
+    const retry = await fetchJson(`${BASE_URL}/${endpoint}`);
     if (!retry.ok) {
       throw new Error(`SportsDB request failed (${retry.status})`);
     }
@@ -55,6 +65,24 @@ export async function getLeagues(): Promise<LeagueSummary[]> {
     "all_leagues.php",
   );
   return clean(data.leagues);
+}
+
+export async function getEnrichedLeagues(): Promise<LeagueSummary[]> {
+  const leagues = await getLeagues();
+
+  const enriched: Array<LeagueSummary | null> = await Promise.all(
+    leagues.map(async (summary) => {
+      const detail = await safe(getLeague(summary.idLeague), undefined);
+      if (!detail) return null;
+      return {
+        ...detail,
+        ...summary,
+        continent: getContinentOf(detail.strCountry),
+      };
+    }),
+  );
+
+  return enriched.filter((l): l is LeagueSummary => l !== null);
 }
 
 export async function getLeague(id: string): Promise<League | undefined> {

@@ -1,11 +1,13 @@
 import { NavLink } from "react-router";
 import { useState } from "react";
-import SearchBar from "./SearchBar";
+import SearchBar from "../ui/SearchBar";
 
 const links = [
   { to: "/", label: "Home", end: true },
   { to: "/leagues", label: "Leagues" },
-  { to: "/search", label: "Search" },
+  { to: "/football", label: "Football" },
+  { to: "/f1", label: "Formula 1" },
+  { to: "/wrestling", label: "WWE" },
 ];
 
 export default function AppHeader() {

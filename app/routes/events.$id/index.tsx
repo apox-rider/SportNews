@@ -1,11 +1,11 @@
 import { Link } from "react-router";
-import type { Route } from "./+types/events.$id";
-import { getEvent, getLeague, safe } from "../lib/sportsdb";
-import PageContainer from "../components/PageContainer";
-import InfoGrid, { InfoItem } from "../components/InfoGrid";
-import EmptyState from "../components/EmptyState";
-import SmartImage from "../components/SmartImage";
-import { isFinished } from "../components/EventCard";
+import type { Route } from "./+types/index";
+import { getEvent, getLeague, safe } from "~/api/sportsdb/sportsdb";
+import PageContainer from "~/components/ui/PageContainer";
+import InfoGrid, { InfoItem } from "~/components/ui/InfoGrid";
+import EmptyState from "~/components/ui/EmptyState";
+import SmartImage from "~/components/ui/SmartImage";
+import { isFinished } from "~/components/EventCard";
 
 export const meta: Route.MetaFunction = ({ loaderData }) => [
   { title: loaderData?.event?.strEvent

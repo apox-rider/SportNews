@@ -1,7 +1,7 @@
 import { Form, Link, useFetcher, useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent, KeyboardEvent } from "react";
-import type { Player, SportEvent, Team } from "../lib/types";
+import type { Player, SportEvent, Team } from "~/api/sportsdb/sportsdb-schema";
 import SmartImage from "./SmartImage";
 
 const MIN_QUERY_LENGTH = 2;

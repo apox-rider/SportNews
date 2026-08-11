@@ -1,8 +1,8 @@
 import EventCard, { isFinished } from "./EventCard";
-import { SectionHeader } from "./SectionHeader";
-import CardGrid from "./CardGrid";
-import EmptyState from "./EmptyState";
-import type { SportEvent } from "../lib/types";
+import { SectionHeader } from "./ui/SectionHeader";
+import CardGrid from "./ui/CardGrid";
+import EmptyState from "./ui/EmptyState";
+import type { SportEvent } from "~/api/sportsdb/sportsdb-schema";
 
 export default function EventSection({
   title,

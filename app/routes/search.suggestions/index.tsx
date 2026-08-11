@@ -1,10 +1,10 @@
-import type { Route } from "./+types/search.suggestions";
+import type { Route } from "./+types/index";
 import {
   safeArr,
   searchEventsByName,
   searchPlayersByName,
   searchTeamsByName,
-} from "../lib/sportsdb";
+} from "~/api/sportsdb/sportsdb";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const url = new URL(request.url);

@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import SmartImage from "./SmartImage";
+import SmartImage from "./ui/SmartImage";
 
 export default function PlayerCard({
   id,

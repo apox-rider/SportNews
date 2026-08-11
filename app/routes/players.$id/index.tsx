@@ -1,11 +1,11 @@
 import { useState } from "react";
-import type { Route } from "./+types/players.$id";
-import { getPlayer, getTeam, safe } from "../lib/sportsdb";
-import DetailHero from "../components/DetailHero";
-import InfoGrid, { InfoItem } from "../components/InfoGrid";
-import PageContainer from "../components/PageContainer";
-import SmartImage from "../components/SmartImage";
-import EmptyState from "../components/EmptyState";
+import type { Route } from "./+types/index";
+import { getPlayer, getTeam, safe } from "~/api/sportsdb/sportsdb";
+import DetailHero from "~/components/DetailHero";
+import InfoGrid, { InfoItem } from "~/components/ui/InfoGrid";
+import PageContainer from "~/components/ui/PageContainer";
+import SmartImage from "~/components/ui/SmartImage";
+import EmptyState from "~/components/ui/EmptyState";
 
 export const meta: Route.MetaFunction = ({ loaderData }) => [
   { title: loaderData?.player?.strPlayer
