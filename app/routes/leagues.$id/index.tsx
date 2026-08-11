@@ -22,8 +22,8 @@ import SmartImage from "~/components/ui/SmartImage";
 
 export const meta: Route.MetaFunction = ({ loaderData }) => [
   { title: loaderData?.league?.strLeague
-      ? `${loaderData.league.strLeague} — SportPesa News`
-      : "League — SportPesa News" },
+      ? `${loaderData.league.strLeague} — SportNews`
+      : "League — SportNews" },
 ];
 
 export async function loader({ params, request }: Route.LoaderArgs) {

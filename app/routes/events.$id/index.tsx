@@ -9,8 +9,8 @@ import { isFinished } from "~/components/EventCard";
 
 export const meta: Route.MetaFunction = ({ loaderData }) => [
   { title: loaderData?.event?.strEvent
-      ? `${loaderData.event.strEvent} — SportPesa News`
-      : "Event — SportPesa News" },
+      ? `${loaderData.event.strEvent} — SportNews`
+      : "Event — SportNews" },
 ];
 
 export async function loader({ params }: Route.LoaderArgs) {

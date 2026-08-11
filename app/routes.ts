@@ -11,6 +11,7 @@ export default [
   route("football/:matchId", "routes/football.$matchId/index.tsx"),
   route("f1", "routes/f1/index.tsx"),
   route("wrestling", "routes/wrestling/index.tsx"),
+  route("wrestling/:name", "routes/wrestling.$name/index.tsx"),
   route("search", "routes/search/index.tsx"),
   route("search/suggestions", "routes/search.suggestions/index.tsx"),
 ] satisfies RouteConfig;

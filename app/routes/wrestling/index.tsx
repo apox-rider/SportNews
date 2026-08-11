@@ -1,14 +1,15 @@
 import type { Route } from "./+types/index";
 import { useState } from "react";
-import { getWweTalent, talentUrl, type WweTalent } from "~/api/wwe/wwe";
+import { getWweTalent, type WweTalent } from "~/api/wwe/wwe";
 import PageContainer from "~/components/ui/PageContainer";
 import EmptyState from "~/components/ui/EmptyState";
+import WrestlerCard from "~/components/WrestlerCard";
 
 export const meta: Route.MetaFunction = () => [
-  { title: "WWE Roster — SportPesa News" },
+  { title: "WWE Roster — SportNews" },
   {
     name: "description",
-    content: "Browse the full WWE talent roster, powered by WWE.com.",
+    content: "Browse the full WWE talent roster with career stats, powered by WWE.com.",
   },
 ];
 
@@ -52,7 +53,8 @@ export default function Wrestling({ loaderData }: Route.ComponentProps) {
           </h1>
           <p className="mt-3 max-w-xl text-red-50/90">
             The full {talents.length.toLocaleString()} talent roster, from
-            legends to current champions.
+            legends to current champions. Tap a card for stats and career
+            highlights.
           </p>
           <input
             type="search"
@@ -66,29 +68,21 @@ export default function Wrestling({ loaderData }: Route.ComponentProps) {
 
       <PageContainer>
         {filtered.length > 0 ? (
-          <div className="columns-1 gap-6 sm:columns-2 lg:columns-3">
-            {[...groups.entries()].map(([letter, list]) => (
-              <div key={letter} className="mb-8 break-inside-avoid">
-                <h2 className="mb-2 text-sm font-bold uppercase tracking-widest text-slate-400">
-                  {letter}
-                </h2>
-                <ul className="space-y-1">
-                  {list.map((talent) => (
-                    <li key={talent.url}>
-                      <a
-                        href={talentUrl(talent)}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="block rounded-lg px-2 py-1.5 text-sm text-slate-700 transition hover:bg-red-50 hover:text-red-700"
-                      >
-                        {talent.value}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+          [...groups.entries()].map(([letter, list]) => (
+            <section key={letter} className="mb-10">
+              <h2 className="mb-4 flex items-baseline gap-2 text-sm font-bold uppercase tracking-widest text-slate-400">
+                {letter}
+                <span className="text-xs font-medium normal-case text-slate-300">
+                  {list.length}
+                </span>
+              </h2>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {list.map((talent) => (
+                  <WrestlerCard key={talent.url} talent={talent} />
+                ))}
               </div>
-            ))}
-          </div>
+            </section>
+          ))
         ) : (
           <EmptyState
             title={query ? "No matching superstars" : "Roster unavailable"}

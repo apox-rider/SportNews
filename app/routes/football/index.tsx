@@ -14,7 +14,7 @@ import PageContainer from "~/components/ui/PageContainer";
 import EmptyState from "~/components/ui/EmptyState";
 
 export const meta: Route.MetaFunction = () => [
-  { title: "Football — Live Scores & Fixtures — SportPesa News" },
+  { title: "Football — Live Scores & Fixtures — SportNews" },
   {
     name: "description",
     content: "Live football scores, results and fixtures powered by iSportsAPI.",

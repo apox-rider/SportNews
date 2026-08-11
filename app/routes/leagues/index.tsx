@@ -14,7 +14,7 @@ import LeagueCard from "~/components/LeagueCard";
 import EmptyState from "~/components/ui/EmptyState";
 
 export const meta: Route.MetaFunction = () => [
-  { title: "Worldwide Leagues — SportPesa News" },
+  { title: "Worldwide Leagues — SportNews" },
   {
     name: "description",
     content:

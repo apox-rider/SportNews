@@ -14,7 +14,7 @@ import EventCard from "~/components/EventCard";
 import EmptyState from "~/components/ui/EmptyState";
 
 export const meta: Route.MetaFunction = ({ loaderData }) => [
-  { title: loaderData?.query ? `Search: ${loaderData.query} — SportPesa News` : "Search — SportPesa News" },
+  { title: loaderData?.query ? `Search: ${loaderData.query} — SportNews` : "Search — SportNews" },
 ];
 
 export async function loader({ request }: Route.LoaderArgs) {

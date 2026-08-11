@@ -15,7 +15,7 @@ import CardGrid from "~/components/ui/CardGrid";
 import EmptyState from "~/components/ui/EmptyState";
 
 export const meta: Route.MetaFunction = () => [
-  { title: "SportPesa News — Sports News, Leagues & Results" },
+  { title: "SportNews — Sports News, Leagues & Results" },
   {
     name: "description",
     content: "Browse leagues, teams, players and match results powered by TheSportsDB.",

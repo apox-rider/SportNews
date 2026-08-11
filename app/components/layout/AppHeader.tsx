@@ -21,10 +21,10 @@ export default function AppHeader() {
           className="flex items-center gap-2 text-lg font-extrabold tracking-tight text-emerald-700"
         >
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-600 text-white">
-            SP
+            SN
           </span>
           <span>
-            Sport<span className="text-emerald-600">Pesa</span>
+            Sport<span className="text-emerald-600">News</span>
           </span>
         </NavLink>
 

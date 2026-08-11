@@ -13,7 +13,7 @@ import PageContainer from "~/components/ui/PageContainer";
 import EmptyState from "~/components/ui/EmptyState";
 
 export const meta: Route.MetaFunction = () => [
-  { title: "Formula 1 — SportPesa News" },
+  { title: "Formula 1 — SportNews" },
   {
     name: "description",
     content: "Latest Formula 1 sessions, drivers and top speeds, powered by OpenF1.",

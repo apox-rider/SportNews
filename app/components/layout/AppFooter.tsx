@@ -61,9 +61,9 @@ export default function AppFooter() {
           <div>
             <p className="flex items-center gap-2 text-lg font-extrabold tracking-tight text-emerald-700">
               <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-sm text-white">
-                SP
+                SN
               </span>
-              Sport<span className="text-emerald-600">Pesa</span>
+              Sport<span className="text-emerald-600">News</span>
             </p>
             <p className="mt-3 max-w-xs text-sm text-slate-500">
               Sports news, leagues, live scores and results from around the
@@ -118,7 +118,7 @@ export default function AppFooter() {
 
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-slate-200 pt-6 sm:flex-row">
           <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} SportPesa News. Built for sport fans.
+            © {new Date().getFullYear()} SportNews. Built for sport fans.
           </p>
           <p className="text-xs text-slate-500">
             Built by{" "}

@@ -14,8 +14,8 @@ import EmptyState from "~/components/ui/EmptyState";
 export const meta: Route.MetaFunction = ({ loaderData }) => [
   {
     title: loaderData?.match
-      ? `${loaderData.match.homeName} vs ${loaderData.match.awayName} — SportPesa News`
-      : "Match — SportPesa News",
+      ? `${loaderData.match.homeName} vs ${loaderData.match.awayName} — SportNews`
+      : "Match — SportNews",
   },
 ];
 
@@ -140,7 +140,7 @@ export default function MatchDetail({ loaderData }: Route.ComponentProps) {
               ))}
             </div>
             <p className="mt-4 text-sm text-slate-400">
-              Only stats recognised by SportPesa are shown.
+              Only stats recognised by SportNews are shown.
             </p>
             <Link
               to="/football"

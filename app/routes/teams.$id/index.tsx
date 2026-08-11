@@ -19,8 +19,8 @@ import EmptyState from "~/components/ui/EmptyState";
 
 export const meta: Route.MetaFunction = ({ loaderData }) => [
   { title: loaderData?.team?.strTeam
-      ? `${loaderData.team.strTeam} — SportPesa News`
-      : "Team — SportPesa News" },
+      ? `${loaderData.team.strTeam} — SportNews`
+      : "Team — SportNews" },
 ];
 
 export async function loader({ params }: Route.LoaderArgs) {
